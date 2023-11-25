@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com" th:replace="~{base::Layout(~{::section})}">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/stylee.css}" />
+
+	<title>this is about page</title>
+</head>
+
+<body>
+
+
+	<section>
+
+		<main role="main">
+
+			<!-- Main jumbotron for a primary marketing message or call to action -->
+			<div class="jumbotron">
+				<div class="container">
+					<h1 class="display-3 text-primary text-center fw-bold ">
+						<marquee class="text-info" width="90%" direction="left" height="80px">
+							Welcome to Our Book Store! </marquee>
+					</h1>
+					<h4>At our Book Store!! we are passionate about serving book's to passionate readers
+						Welcome to Bookstore, where the love for reading comes to life. Established in 2023, our
+						bookstore is a haven for book enthusiasts seeking adventure, romance, motivation, and the
+						fascinating tales of real lives.
+				</div>
+			</div>
+
+			<div class="container mt-5">
+				<!-- Example row of columns -->
+				<div class="row">
+					<div class="col-md-4 bg-white text-dark">
+						<h1>How It All Started</h1>
+						<p>Bookstore was born out of a passion for reading that turned into a mission to share the joy
+							of storytelling with the world. The founder's personal reading habit ignited the idea to
+							create a space where every book lover can find a treasure trove of literary wonders.
+						</p>
+					</div>
+					<div class="col-md-4 bg-dark text-white">
+						<h1>Our Pasion</h1>
+						<p>At Bookstore, we specialize in curating a diverse collection of books, with a focus on
+							adventure, romance, motivation, and biographies. We believe in the power of a good story to
+							transport readers to different worlds, inspire personal growth, and connect us all through
+							the shared experience of reading. </p>
+					</div>
+					<div class="col-md-4 bg-white text-dark">
+						<h1>Join Us in Our Journey</h1>
+						<p>Bookstore is not just a place to buy books; it's a community of readers who share a common
+							love for the written word. Join us on this literary journey, and let's explore the boundless
+							realms of imagination together..</p>
+						<p class="bg-dark text-center text-warning">Provide FeedBack On : ajitsuryawanshi65392@gmail.com
+						</p>
+					</div>
+
+
+					<!--for our mission-->
+					<div class="bg-white mt-5">
+						<h1 class="text-center text-info">OUR MISSION</h1>
+
+						<p>
+							Our mission is simple: to be a haven for those seeking captivating stories that enrich the
+							mind and soul. Whether you're an avid reader or just starting your reading journey,
+							Bookstore is here to be your guide in the vast universe of literature.
+						</p>
+					</div>
+					<!--for Explore the Depths-->
+					<div class="bg-white mt-5">
+						<h1 class="text-center text-info">Explore the Depths</h1>
+
+						<p>
+							Dive into our shelves and discover a world of possibilities. From heart-pounding adventures
+							to heartwarming romances, from motivational gems to inspiring biographies, we have carefully
+							selected each book to ensure a satisfying and enriching reading experience.</p>
+					</div>
+
+
+				</div>
+			</div>
+
+
+
+			<!--contact us div-->
+
+			<div class="container mt-5">
+				<!-- Example row of columns -->
+				<div class="row">
+					<div class="col-md-6 bg-dark text-white">
+						<h1 class="text-center">Contact Us</h1>
+						<p class="">
+							We love hearing from our users! If you have any questions, feedback, or suggestions,
+							please don't hesitate to get in touch. You can reach us through our Contact page, and we
+							promise to respond promptly.
+
+							Thank you for choosing our BookStore as your. We look
+							forward to helping you stay connected and organized.
+
+						<p class="bg-white text-primary text-center">ConTact Us On : ajitsuryawanshi65392@gmail.com
+						</p>
+						</p>
+					</div>
+					<div class="col-md-6 bg-white">
+						<h1 class="text-center"> Connect with us on social media:
+						</h1>
+						<!--image on connect social media page-->
+						<div class="mt-5 text-center">
+
+							<a href="https://www.linkedin.com/feed/?trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558721_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9301136"
+								target=”_blank”><img style="width:20%;" th:src="@{/images/LinkedIn.png}" alt=""
+									class="container" />
+							</a>
+							<a href="https://www.facebook.com/" target=”_blank”> <img style="width:20%;"
+									th:src="@{/images/facebook.png}" alt="" class="container" />
+							</a>
+							<a href="https://www.instagram.com/" target=”_blank”><img style="width:20%;"
+									th:src="@{/images/instagram.jpg}" alt="" class="container" />
+							</a>
+							<a href="https://twitter.com/i/flow/login" target=”_blank”><img style="width:20%;"
+									th:src="@{/images/twitter.png}" alt="" class="container" />
+							</a>
+
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+
+			<hr>
+
+
+
+			<!--footer-->
+
+
+			<!-- footer start-->
+			<footer class="footer1">
+				<p>© 2023 BookStore.com All Rights Reserved</p>
+			</footer>
+			<!-- footer end-->
+
+
+
+			</div> <!-- /container -->
+
+		</main>
+
+
+
+	</section>
+
+
+
+
+
+
+
+
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

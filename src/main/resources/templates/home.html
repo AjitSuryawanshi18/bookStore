@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com" th:replace="~{base::Layout(~{::section})}">
+  
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <title>Home</title>
+ </head>
+
+<body>
+
+	<section>
+
+		<main role="main">
+
+			<div class="container text-center my-5">
+				<h1>WELCOME TO NEW BOOK STORE</h1>
+				<h6>Lorem ipsum dolor sit amet .
+					The graphic and typographic operators know this well, in reality all the professions
+					dealing with the universe of communication have a stable relationship with these words,
+					but what is it? Lorem ipsum is a dummy text without any sense. It is a sequence of Latin
+					words that, as they are positioned, do not form sentences with a complete sense, but give
+					life to a test text useful to fill spaces that will subsequently be occupied from ad hoc
+					texts composed by communication professionals. It is certainly the most famous placeholder
+					text even if there are different versions distinguishable from the order in which the
+					Latin words are repeated.
+				</h6>
+				<img src="/images/BKS.png" width="500px" />
+			</div>
+
+
+
+
+			<!-- footer start-->
+
+			<footer>
+				<div class="footer">
+					<div class="contain">
+						<div class="col">
+							<h2>Company</h2>
+							<ul>
+								<li><a th:href="@{/about}" style="text-decoration:none">About us</a></li>
+								<li><a th:href="@{/about}" style="text-decoration:none">Our Mission</a></li>
+							</ul>
+						</div>
+
+						<div class="col">
+							<h2>Team</h2>
+							<ul>
+								<li>HR Team</li>
+								<li>Finance Team</li>
+								<li>Content Team</li>
+							</ul>
+						</div>
+						<div class="col">
+							<h2>Resources</h2>
+							<ul>
+								<li>Webmail</li>
+								<li>Web templates</li>
+								<li>Email templates</li>
+							</ul>
+						</div>
+						<div class="col">
+							<h2>Contact</h2>
+							<ul>
+								<li><a th:href="@{/contact}" style="text-decoration:none">+91 9970 XXXXXX</a></li>
+								<li><a th:href="@{/contact}" style="text-decoration:none">033 2464 XXXX</a></li>
+								<li><a th:href="@{/contact}" style="text-decoration:none">abc@gmail.com</a></li>
+
+							</ul>
+						</div>
+						<div class="col">
+							<h2>Social</h2>
+							<ul>
+								<li><a href="https://www.linkedin.com/feed/?trk=sem-ga_campid.14650114788_asid.151761418307_crid.657403558721_kw.linkedin%20login_d.c_tid.kwd-12704335873_n.g_mt.e_geo.9301136"
+										target=”_blank”><img style="width:30%;" th:src="@{/images/LinkedIn.png}" alt=""
+											class="container" />
+									</a>
+									<a href="https://www.facebook.com/" target=”_blank”> <img style="width:30%;"
+											th:src="@{/images/facebook.png}" alt="" class="container" />
+									</a>
+								</li>
+
+								<li><a href="https://www.instagram.com/" target=”_blank”><img style="width:30%;"
+											th:src="@{/images/instagram.jpg}" alt="" class="container" />
+									</a>
+									<a href="https://twitter.com/i/flow/login" target=”_blank”><img style="width:30%;"
+											th:src="@{/images/twitter.png}" alt="" class="container" />
+									</a>
+								</li>
+
+							</ul>
+						</div>
+						<div class="col address">
+							<h2>Address </h2>
+							<ul>
+								<li>Sky Towers, Service Road, Pune, Maharashtra</li>
+							</ul>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</footer>
+
+
+			<!-- footer end-->
+
+		</main>
+	</section>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com" th:fragment="Layout(content)">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/stylee.css}" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<title th:text="${title}">base html</title>
+</head>
+
+<body>
+
+	<!-- bookStore NavBar start-->
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<i class="fa-duotone fa-book-open fa-bounce fa-lg"
+				style="--fa-primary-color: #f1f2f3; --fa-secondary-opacity: 1;"></i>
+			<a class="navbar-brand" href="#"><span class="text-white">Book</span><span
+					class="text-dark">Store</span></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+					<li class="nav-item">
+						<a th:class="${activePage == 'home'} ? 'nav-link active' : 'nav-link'" aria-current="page"
+							href="/">Home</a>
+					</li>
+
+					<li class="nav-item">
+						<a th:class="${activePage == 'about'} ? 'nav-link text-dark active' : 'nav-link'"
+							th:href="@{/about}">About</a>
+					</li>
+
+					<li class="nav-item">
+						<a th:class="${activePage == 'contact'} ? 'nav-link active' : 'nav-link'"
+							th:href="@{/contact}">Contact</a>
+					</li>
+
+					<li class="nav-item">
+						<a th:class="${activePage == 'link'} ? 'nav-link text-dark active' : 'nav-link'"
+							href="link">Link</a>
+					</li>
+
+					<!-- added to admin profile it is only accessble in admin panel
+
+        <li class="nav-item">
+          <a th:class="${activePage == 'available_books'} ? 'nav-link active' : 'nav-link'" href="available_books">Available Books</a>
+        </li>
+        -->
+					<!-- added to user profile
+        <li class="nav-item">
+          <a th:class="${activePage == 'fav_books'} ? 'nav-link active' : 'nav-link'" href="fav_books"><i class="fa-brands fa-gratipay fa-spin fa-2xl" style="color: #181616; background-color: red"></i>Fav</a>
+        </li>
+      -->
+					<!-- added to admin profile it is only accessble in admin panel
+			<li class="nav-item mrForNewBook">
+          <a th:class="${activePage == 'register_newbook'} ? 'nav-link btn btn-outline-info active' : 'nav-link btn btn-outline-info'" href="register_newbook"><i class="fa-solid fa-plus fa-flip fa-sm" style="color: #1e201e;"></i>Register_New_Book<i class="fa-solid fa-plus fa-flip fa-sm" style="color: #1e201e;"></i></a>
+        </li>-->
+
+
+
+				</ul>
+
+				<!--<a class="nav-link navbar-dark text-white btn" href="#"><span class="hoverEffect" id="ml">Login</span></a>
+     <a class="nav-link navbar-dark text-white btn" href="#"><span class="hoverEffect">Sign up</span></a>
+     -->
+
+				
+					<a class="nav-link navbar-dark text-white btn" href="/register"><span class="hoverEffect" id="ml">Register</span></a>
+					<a class="nav-link navbar-dark text-white btn" href="/signin"><span class="hoverEffect" id="ml">Signin</span></a>
+
+
+			</div>
+		</div>
+	</nav>
+
+	<!-- bookStore NavBar end-->
+
+	<!-- All content will be added here with help of section to content to here... -->
+
+	<div th:replace="${content}"></div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+
+
+	<!--below script for sweet alert code start-->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	<!--below codes for sweet alerts for different modules start-->
+
+	<!--below script for remove from Favourite book alert-->
+	<script>
+
+		function removeBook(id) {
+
+			swal({
+				title: "Are you sure want to remove ??",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+				.then((willDelete) => {
+					if (willDelete) {
+
+						window.location = "/deleteMyList/" + id;
+
+					} else {
+						swal("Your Favourite book is still your favourite..!!");
+					}
+				});
+
+		}
+
+	</script>
+
+	<!--delete book alerts-->
+	<script>
+
+		function deleteBook(id) {
+
+			swal({
+				title: "Are you sure want to delete book ??",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+				.then((willDelete) => {
+					if (willDelete) {
+
+						window.location = "/deleteBook/" + id;
+
+					} else {
+						swal("Your book is still in your book list..!!");
+					}
+				});
+
+		}
+
+	</script>
+
+
+
+	<!--below codes for sweet alerts for different modules end-->
+
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+
+<body>
+	<!-- start navbar -->
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">BookStore</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+
+					<!--code for register new book and available books in admin login start-->
+					<th:block th:if="${user!=NULL}">
+
+						<li class="nav-item" th:if="${user.role == 'ROLE_ADMIN'}">
+							<a th:class="${activePage == 'available_books'} ? 'nav-link active' : 'nav-link'"
+								href="/admin/available_books">Available Books</a>
+						</li>
+						<li class="nav-item" th:if="${user.role == 'ROLE_ADMIN'}"> <a
+								th:class="${activePage == 'register_newbook'} ? 'nav-link btn btn-outline-info active' : 'nav-link btn btn-outline-info'"
+								href="/admin/register_newbook"></i>Register_New_Book</a>
+						</li>
+                  <!--code for register new book and available books in admin login end-->
+
+                        <!-- code for user login start-->
+						
+						<li class="nav-item" th:if="${user.role == 'ROLE_USER'}">
+							<a th:class="${activePage == 'available_books'} ? 'nav-link active' : 'nav-link'"
+								href="/user/available_books">Available Books</a>
+						</li>
+						
+						<li class="nav-item" th:if="${user.role == 'ROLE_USER'}">
+							<a th:class="${activePage == 'fav_books'} ? 'nav-link active' : 'nav-link'"
+								href="/user/fav_books"><i class="fa-brands fa-gratipay fa-spin fa-2xl"
+									style="color: #181616; background-color: red"></i>Fav</a>
+
+
+                        <!-- code for user login end-->
+
+					</th:block>
+
+
+
+                    <!--moved this block to the base.html-->
+					<!--<th:block th:if="${user==NULL}">
+						<li class="nav-item"><a class="nav-link" href="register">Register</a></li>
+						<li class="nav-item"><a class="nav-link" href="signin">Signin</a></li>
+
+					</th:block>-->
+
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<th:block th:if="${user!=NULL}">
+						<!--display name after login-->
+						<li class="nav-item"><span class="nav-link">[[${user.userName}]]</span></li>
+
+
+						<!--dynamic links for admin and user profile's-->
+						<li class="nav-item" th:if="${user.role == 'ROLE_ADMIN'}"><a class="nav-link"
+								href="/admin/profile">Profile</a></li>
+						<li class="nav-item" th:if="${user.role == 'ROLE_USER'}"><a class="nav-link"
+								href="/user/profile">Profile</a></li>
+
+						<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+					</th:block>
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- End Navbar -->
+
+
+	<div th:replace="${content}"></div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>

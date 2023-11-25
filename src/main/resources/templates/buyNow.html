@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com" th:replace="~{base::Layout(~{::section})}">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/stylee.css}" />
+
+	<title>link page</title>
+</head>
+
+<body>
+
+
+
+
+	<section>
+
+		<main role="main">
+
+			<h1>Buy NOw page</h1>
+			
+			
+			<div th:object="${book}">
+				
+				
+				<div class="mb-3">
+						<label for="name" class="form-label">Name : <span th:text="${book.name}">[...]</span></label> 
+					</div>
+
+					<div class="mb-3">
+						<label for="author" class="form-label">Author : <span th:text="${book.author}" th:unless="${book == null}">[...]</span></label> 
+					</div>
+					<div class="mb-3">
+						<label for="price" class="form-label">Price : <span th:text="${book.price}">[...]</span></label>
+					</div>
+					<label for="cod" class="form-label">Payment Option : COD</label>
+
+					<input type="text" class="form-control" name="address" placeholder="Enter your address here..!">
+
+                     <a th:href="@{/buyNow/congrats_Message}">Place Order</a>
+				
+			</div>
+			
+			
+			<hr>
+			<!--footer-->
+
+
+			<!-- footer start-->
+			<footer class="footer1">
+				<p>© 2023 BookStore.com All Rights Reserved</p>
+			</footer>
+			<!-- footer end-->
+
+
+		</main>
+	</section>
+
+
+	<!-- footer start-->
+	<footer class="footer1">
+		<p>© 2023 BookStore.com All Rights Reserved</p>
+	</footer>
+	<!-- footer end-->
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
