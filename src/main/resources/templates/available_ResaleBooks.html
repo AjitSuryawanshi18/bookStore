@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com" th:replace="~{base_Login::layout(~{::section})}">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/stylee.css}" />
+
+	<title th:text="${title}"></title>
+</head>
+
+<body>
+
+	<section>
+
+		<main role="main">
+
+			<div class="row row-cols-1 row-cols-md-4 h-50 m-auto">
+
+				<div class="col mt-4 mb-4" th:each="b:${books}">
+					<div class="card ">
+
+						<form th:if="${user.role == 'ROLE_USER'}" th:action="@{'/user/addBook/' + ${b.id}}"
+							method="post"> <button type="submit"
+								style="border: none; background: none; font-size: 20px;"><span><i
+										title="Click to add into Your Favourite!"
+										class="fa-regular fa-heart"></i></span></button>
+							<span class="d-flex float-end m-2 text-info" th:text="${b.bookType}" ></span>
+
+							<img th:src="@{/images/{imageName}(imageName=${b.bookImageName})}" class="card-img-top"
+								alt="No Image" width="100%" height="300px">
+						</form>
+
+
+
+
+						<!--work here on image fetch from database i am providing one image for making sense
+-->
+						<div class="card-body">
+							<h3 class="card-title" th:text="${b.name}"></h3>
+							<h5 th:text="${b.author}"></h5>
+							<p><span class="fw-bold">&#8377; <span th:text="${b.price}"></span></span></p>
+
+							<div class="row" th:if="${user.role == 'ROLE_USER'}">
+								<a class="btn btn-info" style="color:white; text-decoration: none;"
+									th:href="@{/user/available_ResaleBooks/view-details_Resale/{id} (id=${b.id})}">View Details</a>
+							</div>
+							<!--from here it will redirect to the view page and then payment-->
+							
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+
+
+
+
+
+
+			<!-- footer start-->
+			<footer class="footer1">
+				<p>© 2024 BookStore.com All Rights Reserved</p>
+			</footer>
+			<!-- footer end-->
+		</main>
+	</section>
+
+
+
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

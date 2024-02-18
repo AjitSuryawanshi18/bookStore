@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.bookStore.entity.User;
-import com.bookStore.repository.UserRepo;
+import com.bookStore.repository.UserRepository;
 
 
 
@@ -17,14 +17,14 @@ import com.bookStore.repository.UserRepo;
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserRepo userRepo;
+	private UserRepository userRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		User user=userRepo.findByEmail(username);
+		User user=userRepository.findByEmail(username);
 
-		System.out.println(user); // printing for checking purpose
+//		System.out.println(user); // printing for checking purpose
 
 		if (user == null) {
 			throw new UsernameNotFoundException("user not found");

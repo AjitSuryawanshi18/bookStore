@@ -1,3 +1,6 @@
+
+// this is for provide link after successful login 
+
 package com.bookStore.config;
 
 import java.io.IOException;
@@ -23,9 +26,9 @@ public class CustomAuthSucccessHandler implements AuthenticationSuccessHandler {
 		Set<String> roles =AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
 		if (roles.contains("ROLE_ADMIN")) {
-			response.sendRedirect("/admin/profile");
+			response.sendRedirect("/admin/admin_Home");
 		} else {
-			response.sendRedirect("/user/profile");
+			response.sendRedirect("/user/user_Home");
 		}
 	}
 

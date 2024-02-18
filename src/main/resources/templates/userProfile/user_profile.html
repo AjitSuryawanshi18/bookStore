@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base_Login::layout(~{::section})}">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+
+	<style>
+		/* Style to visually indicate the disabled state */
+		.disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+	</style>
+
+
+</head>
+
+<body>
+
+	<section class="">
+
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="card text-dark border-primary mt-3 mb-3 text-center offset-1" style="max-width: 50rem;">
+					<div class="card-header">
+						<h1> User profile Page </h1>
+						<span><button style="text-decoration: none;" class="btn btn-outline-warning d-flex float-end"
+								onclick="myFunction()" title="Click to Open Settings!!">Settings</button></span>
+
+					</div>
+					<div class="card-body text-primary">
+						<h4 class="card-title">Name: [[${user.name}]]</h4>
+						<hr>
+						<h4 class="card-title">UserName: [[${user.userName}]]</h4>
+						<hr>
+						<h4 class="card-title">Email: [[${user.email}]]</h4>
+						<hr>
+						<h4 class="card-title">Mob No: [[${user.mobileNo}]]</h4>
+						<hr>
+						<h4 class="card-title">Role: [[${user.role}]]</h4>
+
+
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" id="myDIV" style="display: none;" th:object="${user}">
+				<div class="card text-white bg-dark mt-3" style="max-width: 30rem;">
+					<div class="card-header text-center">
+						<h5>Settings</h5>
+					</div>
+					<div class="card-body text-center">
+
+						<h4 class=""><a style="text-decoration: none;" th:href="@{/user/change_PasswordUser}">Change
+								Password</a></h4>
+
+						<h4 class=""><a style="text-decoration: none;" th:href="@{/password-request}">Forgot
+								Password</a></h4>
+
+						<h4 class=""><a style="text-decoration: none;" th:href="@{/user/delete-account/{userId} (userId=${user.id})}">Delete Account</a></h4>
+
+						<h4 class=""><a th:href="@{/logout}" style="text-decoration: none;">LogOut</a></h4>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!--footer-->
+
+
+		<!-- footer start-->
+		<footer class="footer1">
+			<p>© 2024 BookStore.com All Rights Reserved</p>
+		</footer>
+		<!-- footer end-->
+
+		<!--<script>
+			function enableDiv() {
+				var div = document.getElementById('myDiv');
+				div.classList.remove('disabled');
+			}
+		</script>-->
+
+
+		<script>
+			function myFunction() {
+				var x = document.getElementById("myDIV");
+				if (x.style.display === "none") {
+					x.style.display = "block";
+				} else {
+					x.style.display = "none";
+				}
+			}
+		</script>
+
+
+
+	</section>
+
+</body>
+
+</html>

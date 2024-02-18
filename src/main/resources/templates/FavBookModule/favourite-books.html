@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com" th:replace="~{base_Login::layout(~{::section})}">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+
+	<title th:text=${title}>favourite book page</title>
+	<style>
+
+
+	</style>
+
+
+</head>
+
+<body>
+
+
+	<section>
+
+		<main role="main">
+
+
+
+			<th:block th:if="${session.bookPresent}">
+				<p class="text-center text-success fs-4">[[${session.bookPresent}]]</p>
+				<th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
+				<!-- this is for remove attribute after refresh in spring boot 3-->
+			</th:block>
+
+
+
+
+
+
+
+
+
+
+			<div class="row row-cols-1 row-cols-md-4 h-50 m-auto">
+
+				<div class="col mt-4 mb-4" th:each="b :${favbooks}">
+					<div class="card ">
+
+						<form th:action="@{'/user/removeBook/' + ${b.id}}" method="post">
+							<button type="submit" style="border: none; background: none; font-size: 20px;"><span
+									style="color:red"><i title="Click to remove from Favourite!"
+										class="fa-solid fa-heart"></i></span></button>
+							<span class="d-flex float-end m-2 fa-beat-fade" th:text="${b.bookType}" th:style="'color: ' + (${b.bookType == 'New' ? 'green' : 'cyan'})" ></span>
+
+							<img th:src="@{/images/{imageName}(imageName=${b.bookImageName})}" class="card-img-top"
+								alt="No Image" width="100%" height="300px">
+						</form>
+
+
+
+						<div class="card-body">
+							<h3 class="card-title" th:text="${b.name}"></h3>
+							<h5 th:text="${b.author}"></h5>
+							<h6>&#8377; <span th:text="${b.price}"></span></h6>
+							<p>Free Delivery</p>
+
+<!--when new book added to favourites-->
+							<span class="row" th:if="${b.bookType == 'New'}" ><a class="btn btn-info" style="color:white; text-decoration: none;"
+									th:href="@{/user/available_NewBooks/view-details/{id} (id=${b.id})}">View
+									Details</a></span>
+									
+<!--when resale book added to favourites-->
+							<span class="row" th:if="${b.bookType == 'ReSale'}"><a class="btn btn-info" style="color:white; text-decoration: none;"
+									th:href="@{/user/available_ResaleBooks/view-details_Resale/{id} (id=${b.id})}">View
+									Details</a></span>
+							<!--from here it will redirect to the view page and then payment-->
+
+							
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+
+			<!-- footer start-->
+			<footer class="footer1">
+				<p>© 2024 BookStore.com All Rights Reserved</p>
+			</footer>
+			<!-- footer end-->
+
+		</main>
+	</section>
+	
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

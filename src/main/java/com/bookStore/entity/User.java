@@ -1,9 +1,16 @@
 package com.bookStore.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
+
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class User {
@@ -23,22 +30,85 @@ public class User {
 	private String password;
 
 	private String role;
+	
+	private boolean enable;
 
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+	private String verificationCode;
+	
+	private String profileImage;
+	
+	
+// add to favorite code start
+	
+	 @ManyToMany(cascade = CascadeType.MERGE)
+	 @JoinTable(name = "user_favorite_books",
+     joinColumns = @JoinColumn(name = "user_id"),
+     inverseJoinColumns = @JoinColumn(name = "book_id"))
+	    private List<book> favoriteBooks;
+	
+	
+ 
+	public List<book> getFavoriteBooks() {
+		return favoriteBooks;
 	}
 
-	public User(int id, String name, String userName, String email, String mobileNo, String password, String role) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.userName = userName;
-		this.email = email;
-		this.mobileNo = mobileNo;
-		this.password = password;
-		this.role = role;
+	public void setFavoriteBooks(List<book> favoriteBooks) {
+		this.favoriteBooks = favoriteBooks;
 	}
+
+	// add to favorite code end
+	
+	
+	
+	
+	
+	
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+//	public User() {
+//		super();
+//		// TODO Auto-generated constructor stub
+//	}
+// 
+//	
+//
+//	
+//
+//	public User(int id, String name, String userName, String email, String mobileNo, String password, String role,
+//			boolean enable, String verificationCode) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//		this.userName = userName;
+//		this.email = email;
+//		this.mobileNo = mobileNo;
+//		this.password = password;
+//		this.role = role;
+//		this.enable = enable;
+//		this.verificationCode = verificationCode;
+//	}
 
 	public int getId() {
 		return id;
@@ -96,13 +166,16 @@ public class User {
 		this.role = role;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", userName=" + userName + ", email=" + email + ", mobileNo="
-				+ mobileNo + ", password=" + password + ", role=" + role + "]";
+				+ mobileNo + ", password=" + password + ", role=" + role + ", enable=" + enable + ", verificationCode="
+				+ verificationCode + ", profileImage=" + profileImage + ", favoriteBooks=" + favoriteBooks + "]";
 	}
+
+
+
+
 
 
 

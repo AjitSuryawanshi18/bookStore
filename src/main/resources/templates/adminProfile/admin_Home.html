@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base_Login::layout(~{::section})}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+</head>
+<body>
+	<section>
+		<h1>WelCome Admin its Your Home Page..!!</h1>
+		
+			<span th:if="${user.role == 'ROLE_ADMIN'}"><img 
+								th:src="@{/images/Admin Home Page.jpg}" alt="Image" width="100%"
+								>
+
+						</span>
+						
+		
+		
+		<!--footer-->
+
+
+			<!-- footer start-->
+			<footer class="footer1">
+				<p>© 2024 BookStore.com All Rights Reserved</p>
+			</footer>
+			<!-- footer end-->
+
+	</section>
+
+</body>
+</html>

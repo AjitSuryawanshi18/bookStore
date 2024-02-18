@@ -11,7 +11,7 @@
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" th:href="@{/css/stylee.css}" />
 
-	<title>available book page</title>
+	<title th:text="${title}"></title>
 </head>
 
 <body>
@@ -20,47 +20,85 @@
 
 		<main role="main">
 
-			<div class="container my-5 col-md-8 table-responsive">
-				<table class="table  table-striped table-hover ">
-					<thead>
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Name</th>
-							<th scope="col">Author</th>
-							<th scope="col">Price</th>
-							<th scope="col">Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="b :${book}">
-							<td th:text="${b.id}"></td>
-							<td th:text="${b.name}"></td>
-							<td th:text="${b.author}"></td>
-							<td th:text="${b.price}"></td>
-							<td><a class="btn btn-secondary btn-sm" th:href="@{/mylist/{id}(id=${b.id})}"><div title="Click to add into Your Favourite!"><i class="fa-solid fa-heart"></i></div>
-									<a style="color:blue" th:href="@{/available_books/editBook/{id}(id=${b.id})}"><i
-											class="fa-solid fa-pen-to-square ms-4"></i></a>
-									<a style="color:red" th:onclick="|deleteBook(${b.id})|"><i
-											class="fa-solid fa-trash ms-4"></i></a>
-							</td>
+			<div class="row row-cols-1 row-cols-md-4 h-50 m-auto">
 
-						</tr>
+				<div class="col mt-4 mb-4" th:each="b:${books}">
+					<div class="card ">
 
-					</tbody>
-				</table>
+						<!--	<form th:if="${user.role == 'ROLE_USER'}" th:action="@{'/user/addBook/' + ${b.id}}"
+							method="post"> <button type="submit"
+								style="border: none; background: none; font-size: 20px;"><span><i
+										title="Click to add into Your Favourite!"
+										class="fa-regular fa-heart"></i></span></button>
+							<span class="d-flex float-end m-2 text-success" th:text="${b.bookType}" ></span>
+
+							<img th:src="@{/images/{imageName}(imageName=${b.bookImageName})}" class="card-img-top"
+								alt="No Image" width="100%" height="300px">
+						</form>-->
+
+
+
+
+						<!--work here on image fetch from database i am providing one image for making sense
+-->
+
+						<span th:if="${user.role == 'ROLE_ADMIN'}">
+						<span class="d-flex float-end fa-beat-fade m-2" th:text="${b.bookType}" th:style="'color: ' + (${b.bookType == 'New' ? 'green' : 'cyan'})" ></span>
+
+							<img th:src="@{/images/{imageName}(imageName=${b.bookImageName})}" alt="Image" width="100%"
+								height="300px">
+
+						</span>
+
+
+						<div class="card-body">
+							<h3 class="card-title" th:text="${b.name}"></h3>
+							<h5 th:text="${b.author}"></h5>
+							<p><span class="fw-bold">&#8377; <span th:text="${b.price}"></span></span><span
+									class="text-success"> Free Delivery</span></p>
+
+							<!--<div class="row" th:if="${user.role == 'ROLE_USER'}">
+								<a class="btn btn-info" style="color:white; text-decoration: none;"
+									th:href="@{/user/available_books/view-details/{id} (id=${b.id})}">View Details</a>
+							</div>-->
+							<!--ssfrom here it will redirect to the view page and then payment-->
+							<!--create view details page-->
+
+							<span th:if="${user.role == 'ROLE_ADMIN'}">
+
+								<a style="color:blue" th:href="@{/admin/editBook/{id}(id=${b.id})}"><i
+										class="fa-solid fa-pen-to-square ms-4"></i></a>
+
+								<a style="color:red" th:href="@{/admin/deleteBook/{id}(id=${b.id})}"><i
+										class="fa-solid fa-trash ms-4"></i></a>
+
+
+							</span>
+						</div>
+					</div>
+				</div>
+
+
 			</div>
 
 
 
-			<hr>
+
+
+
 
 			<!-- footer start-->
 			<footer class="footer1">
-				<p>© 2023 BookStore.com All Rights Reserved</p>
+				<p>© 2024 BookStore.com All Rights Reserved</p>
 			</footer>
 			<!-- footer end-->
 		</main>
 	</section>
+
+
+
+
+
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

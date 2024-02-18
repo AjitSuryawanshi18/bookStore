@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bookStore.entity.MyFav_Books;
 import com.bookStore.entity.User;
 import com.bookStore.entity.book;
-import com.bookStore.repository.UserRepo;
+import com.bookStore.repository.UserRepository;
 import com.bookStore.service.BookService;
 import com.bookStore.service.MyFav_BooksService;
 import com.bookStore.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -36,11 +38,9 @@ public class bookController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
-	private UserRepo userRepo;
+	private UserRepository userRepository;
 
 
 	// home controller method
@@ -90,37 +90,10 @@ public class bookController {
 	public String signin() {
 		return "pages_From_RegistrationProject/signin";
 	}
-
-	// available books page controller method added in admin controller
-//	@GetMapping("/available_books")
-//	public ModelAndView available_books(Model model){
-//		model.addAttribute("activePage", "available_books");
-//		model.addAttribute("title","available_books - bookStore");
-//
-//		List<book> list=service.available_books();
-//		return new ModelAndView("available_books","book",list);
-//	}
-
-	// controller for addBook or save book from admin login request come here to store new registered book
-		@PostMapping("/save")
-		public String addBook(@ModelAttribute book b) {
-			service.save(b);
-			return "redirect:/available_books";
-		}
+	
 
 
-//	// fav_books page controller method fav_books  added to user controller for user profile access only
-//	@GetMapping("/fav_books")
-//	public String fav_books(Model model){
-//		model.addAttribute("activePage", "fav_books");
-//		model.addAttribute("title","fav_books - bookStore");
-//
-//		// for adding data to the favBooks after clicking add to Fav Books it will shows data is added or not on UI
-//		List<MyFav_Books>list=myBookService.getAllMyBooks();
-//		model.addAttribute("book",list);
-//
-//		return "/fav_books";
-//	}
+
 
 
 	// controller for getting book which have to add to fav column with reference to  its id
@@ -133,38 +106,6 @@ public class bookController {
 	}
 
 
-//	controller for delete book
-	@GetMapping("/deleteBook/{id}")
-	public String deleteBook(@PathVariable("id") int id) {
-		service.deleteById(id);
-		return "redirect:/available_books";
-	}
-
-	//controller for edit book
-	@GetMapping("/available_books/editBook/{id}")
-	public String editBook(@PathVariable("id") int id,Model model) {
-		book b=service.getBookById(id);
-		model.addAttribute("book", b);
-		return "editBook";
-	}
-
-
-
-
-
-
-
-//	// register new book controller method
-//	@GetMapping("/register_newbook")
-//	public String register_newbook(Model model){
-//		model.addAttribute("activePage", "register_newbook");
-//		model.addAttribute("title","register_newbook - bookStore");
-//
-//		return "/register_newbook";
-//	}
-
-
-
 
 
 
@@ -175,38 +116,14 @@ public class bookController {
 
 		if (p != null) {
 			String email = p.getName();
-			User user = userRepo.findByEmail(email);
+			User user = userRepository.findByEmail(email);
 			m.addAttribute("user", user);
 		}
 
 	}
+	
 
 
 
-
-	//this is save user from RegLoginController moved here bcz here also have direct access like RegLoginController
-
-
-//	controller for save user
-	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute User user,HttpSession session,Model m) {
-
-//		 System.out.println(user);
-        String password=bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(password);
-        user.setRole("ROLE_USER");
-		User u = userService.saveUser(user);
-
-		if (u != null) {
-
-			session.setAttribute("msg", "Register successfully");
-
-		} else {
-
-			session.setAttribute("msg", "Something wrong server");
-		}
-		return "redirect:/register";
-	}
-
-
+	
 }

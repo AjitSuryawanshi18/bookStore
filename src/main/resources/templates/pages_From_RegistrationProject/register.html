@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="col-md-6 offset-md-3">
 					<div class="card">
-						<div class="card-header text-center fs-4">Register Page</div>
+						<div class="card-header text-center fs-4">REGISTER PAGE</div>
 
 
 						<th:block th:if="${session.msg}">
@@ -27,10 +27,10 @@
 									<label>Enter Full Name</label> <input type="text" name="name" class="form-control">
 								</div>
 								<div class="mb-3">
-									<label>Enter UserName</label> <input type="text" name="userName" class="form-control">
+									<label>Enter UserName</label> <input type="text" name="userName" class="form-control" required>
 								</div>
 								<div class="mb-3">
-									<label>Enter Email</label> <input type="text" name="email" class="form-control">
+									<label>Enter Email</label> <input type="email" name="email" class="form-control" required>
 								</div>
 
 								<div class="mb-3">
@@ -39,8 +39,9 @@
 								</div>
 
 								<div class="mb-3">
-									<label>Enter Password</label> <input type="text" name="password"
-										class="form-control">
+									<label>Enter Password</label> <input type="password" name="password"
+										class="form-control" id="myInput" required> <input type="checkbox" onclick="myFunction()">Show Password
+									
 								</div>
 								<button class="btn btn-primary col-md-12">Register</button>
 								<p class="text-center mt-2"><span class="text-success">Already User </span><a
@@ -55,7 +56,18 @@
 		</div>
 
 
+<!--script for show password -->
 
+		<script>function myFunction() {
+
+				var x = document.getElementById("myInput");
+				if (x.type === "password") {
+					x.type = "text";
+				} else {
+					x.type = "password";
+				}
+			}
+		</script>
 
 
 	</section>

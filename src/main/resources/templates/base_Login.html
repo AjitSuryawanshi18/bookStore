@@ -3,23 +3,45 @@
 
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
+
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<style>
+		.footer1 {
+			display: flex;
+			justify-content: center;
+			padding: 2px;
+			background-color: lightseagreen;
+			color: #fff;
+		}
 
 
+
+		.avatar {
+			vertical-align: middle;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+		}
+	</style>
+
+	<title th:text="${title}">Insert title here</title>
 </head>
+
 
 <body>
 	<!-- start navbar -->
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-success">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">BookStore</a>
+
+			<a th:if="${user.role == 'ROLE_ADMIN'}" class="navbar-brand" th:href="@{/admin/admin_Home}">BookStore</a>
+			<a th:if="${user.role == 'ROLE_USER'}" class="navbar-brand" th:href="@{/user/user_Home}">BookStore</a>
+
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
 				aria-label="Toggle navigation">
@@ -27,61 +49,118 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+					<li th:if="${user.role == 'ROLE_ADMIN'}" class="nav-item"><a th:class="${activePage == 'admin_Home'} ? 'nav-link active' : 'nav-link'"
+							aria-current="page" th:href="@{/admin/admin_Home}">Home</a></li>
+					<li th:if="${user.role == 'ROLE_USER'}" class="nav-item"><a th:class="${activePage == 'user_Home'} ? 'nav-link active' : 'nav-link'"
+							aria-current="page" th:href="@{/user/user_Home}">Home</a></li>
 
 					<!--code for register new book and available books in admin login start-->
 					<th:block th:if="${user!=NULL}">
 
 						<li class="nav-item" th:if="${user.role == 'ROLE_ADMIN'}">
 							<a th:class="${activePage == 'available_books'} ? 'nav-link active' : 'nav-link'"
-								href="/admin/available_books">Available Books</a>
+								href="/admin/available_books">Available Books<sup><i class="fa-solid fa-circle-dot fa-beat-fade" style="color: #f00511;"></i></sup></a>
 						</li>
 						<li class="nav-item" th:if="${user.role == 'ROLE_ADMIN'}"> <a
-								th:class="${activePage == 'register_newbook'} ? 'nav-link btn btn-outline-info active' : 'nav-link btn btn-outline-info'"
-								href="/admin/register_newbook"></i>Register_New_Book</a>
+								th:class="${activePage == 'register_newbook'} ? 'nav-link btn btn-outline-success active' : 'nav-link btn btn-outline-success'"
+								href="/admin/register_newbook"></i>Register_Book</a>
 						</li>
-                  <!--code for register new book and available books in admin login end-->
 
-                        <!-- code for user login start-->
 						
+
+						<!-- code for user login start-->
+
 						<li class="nav-item" th:if="${user.role == 'ROLE_USER'}">
-							<a th:class="${activePage == 'available_books'} ? 'nav-link active' : 'nav-link'"
-								href="/user/available_books">Available Books</a>
+							<a th:class="${activePage == 'available_NewBooks'} ? 'nav-link active' : 'nav-link'"
+								href="/user/available_NewBooks">Available Books<sup><i class="fa-beat-fade" style="color: #f00511; font-weight: bolder;">new</i></sup></a>
 						</li>
-						
 						<li class="nav-item" th:if="${user.role == 'ROLE_USER'}">
-							<a th:class="${activePage == 'fav_books'} ? 'nav-link active' : 'nav-link'"
-								href="/user/fav_books"><i class="fa-brands fa-gratipay fa-spin fa-2xl"
+							<a th:class="${activePage == 'available_ResaleBooks'} ? 'nav-link active' : 'nav-link'"
+								href="/user/available_ResaleBooks">Available Books<sup><i class="fa-beat-fade" style="color: #f00511; font-weight: bolder;">Resale</i></sup></a>
+						</li>
+
+						<li class="nav-item" th:if="${user.role == 'ROLE_USER'}">
+							<a th:class="${activePage == 'favourite-books'} ? 'nav-link active' : 'nav-link'"
+								th:href="@{/user/FavBookModule/favourite-books}"><i
+									class="fa-brands fa-gratipay fa-spin fa-2xl"
 									style="color: #181616; background-color: red"></i>Fav</a>
 
 
-                        <!-- code for user login end-->
+						<!-- code for user login end-->
 
 					</th:block>
 
 
 
-                    <!--moved this block to the base.html-->
-					<!--<th:block th:if="${user==NULL}">
-						<li class="nav-item"><a class="nav-link" href="register">Register</a></li>
-						<li class="nav-item"><a class="nav-link" href="signin">Signin</a></li>
-
-					</th:block>-->
 
 				</ul>
 				<ul class="navbar-nav ml-auto">
-					<th:block th:if="${user!=NULL}">
+					<th:block th:if="${user != NULL}">
 						<!--display name after login-->
-						<li class="nav-item"><span class="nav-link">[[${user.userName}]]</span></li>
+						<!--THIS LI WORKS IF ROLE IS ADMIN-->
+						<li th:if="${user.role == 'ROLE_ADMIN'}" class="nav-item"><span class="nav-link">
+
+								<!-- working with profile photo module -->
+
+
+								<form th:action="@{/admin/uploadProfileImage}" method="post"
+									enctype="multipart/form-data" id="uploadForm">
+									<input type="file" name="file" id="fileInput" style="display:none"
+										onchange="submitForm()" />
+									<img class="avatar" th:if="${user.profileImage == null}"
+										src="/images/UserProfile_Photos/Default_Profile_Picture.svg.png"
+										alt="Default Profile Image" style="cursor: pointer;"
+										onclick="triggerFileInput()" />
+									<img class="avatar" th:if="${user.profileImage != null}" th:src="@{/admin/images}"
+										alt="User Profile Image" />
+									<!--userName on Nav Bar and upside is the profile photo code-->
+									[[${user.userName}]]<i class="fa-solid fa-circle fa-flip fa-2xs"
+										style="color: #fb0909;"></i>
+								</form>
+
+
+
+							</span>
+						</li>
+
+
+						<!--THIS LI WORKS IF ROLE IS USER-->
+						<li th:if="${user.role == 'ROLE_USER'}" class="nav-item"><span class="nav-link">
+
+								<!-- working with profile photo module -->
+
+
+								<form th:action="@{/user/uploadProfileImage}" method="post"
+									enctype="multipart/form-data" id="uploadForm">
+									<input type="file" name="file" id="fileInput" style="display:none"
+										onchange="submitForm()" />
+									<img class="avatar" th:if="${user.profileImage == null}"
+										src="/images/UserProfile_Photos/Default_Profile_Picture.svg.png"
+										alt="Default Profile Image" style="cursor: pointer;"
+										onclick="triggerFileInput()" />
+									<img class="avatar" th:if="${user.profileImage != null}" th:src="@{/user/images}"
+										alt="User Profile Image" />
+									<!--userName on Nav Bar and upside is the profile photo code-->
+									[[${user.userName}]]<i class="fa-solid fa-circle fa-flip fa-2xs"
+										style="color: #fb0909;"></i>
+								</form>
+
+
+
+							</span>
+						</li>
 
 
 						<!--dynamic links for admin and user profile's-->
-						<li class="nav-item" th:if="${user.role == 'ROLE_ADMIN'}"><a class="nav-link"
-								href="/admin/profile">Profile</a></li>
-						<li class="nav-item" th:if="${user.role == 'ROLE_USER'}"><a class="nav-link"
-								href="/user/profile">Profile</a></li>
+						<li class="nav-item" th:if="${user.role == 'ROLE_ADMIN'}"><a th:class="${activePage == 'admin_profile'} ? 'nav-link active' : 'nav-link'"
+								href="/admin/admin_profile">Profile</a></li>
+						<li class="nav-item" th:if="${user.role == 'ROLE_USER'}"><a th:class="${activePage == 'profile'} ? 'nav-link active' : 'nav-link'"
+								href="/user/user_profile">Profile</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+						<!--<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+							
+-->
+
 					</th:block>
 
 				</ul>
@@ -93,6 +172,26 @@
 
 
 	<div th:replace="${content}"></div>
+
+
+
+	<!--scripts for profile change-->
+	<script th:inline="javascript">
+		function triggerFileInput() {
+			document.getElementById('fileInput').click();
+		}
+
+		function submitForm() {
+			document.getElementById('uploadForm').submit();
+		}
+	</script>
+
+
+
+
+
+
+
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

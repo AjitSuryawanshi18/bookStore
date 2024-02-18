@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com" th:replace="~{base_Login::layout(~{::section})}">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+
+	<title>new Registration</title>
+</head>
+
+<body>
+	<section>
+
+		<main role="main">
+
+			<div class="container my-5 p-5 "
+				style="border:2px solid springgreen; background-color: #f1f1f1; color: lightseagreen;">
+				<h4 class="text-center"><i class="fa-solid fa-plus fa-beat fa-2xl" style="color: #1e201e;"></i></h4>
+
+				<h4 class="text-center">Register New Book</h4>
+
+				<!--message after book submitted succesfully-->
+				<th:block th:if="${session.msg}">
+					<p class="text-center text-success fs-4">[[${session.msg}]]</p>
+					<th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
+					<!-- this is for remove attribute after refresh in spring boot 3-->
+				</th:block>
+
+				<!--shows error if any issue occurs when user uploading image-->
+				<div th:if="${error}" th:text="${error}" style="color: red;"></div>
+
+
+
+				<form class="col-md-4 offset-md-4" th:action="@{/admin/saveBook}" method="post"
+					enctype="multipart/form-data">
+					<div class="mb-3">
+						<label for="name" class="form-label">Name
+						</label> <input type="text" class="form-control" name="name">
+					</div>
+
+					<div class="mb-3">
+						<label for="author" class="form-label">Author
+						</label> <input type="text" class="form-control" name="author">
+					</div>
+					<div class="mb-3">
+						<label for="price" class="form-label">Price
+						</label> <input type="text" class="form-control" name="price">
+					</div>
+
+
+					<!--book description-->
+					<div class="mb-3">
+						<label for="bookDescription" class="form-label">Book Description
+						</label><textarea id="bD" name="bookDescription" rows="4" cols="50">
+                                </textarea>
+					</div>
+
+					<!--  this code for adding book type ( new or ReSale ) name to the books -->
+					<div class="mb-3">
+						<label class="form-label">Book Type:</label>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="bookType" id="newBook" value="New">
+							<label class="form-check-label" for="newBook">New</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="bookType" id="reSaleBook" value="ReSale">
+							<label class="form-check-label" for="reSaleBook">ReSale</label>
+						</div>
+					</div>
+
+
+
+					<!--image upload code-->
+
+					<div class="mb-3">
+						<label for="bookImageName" class="form-label">Book Image</label>
+						<input type="file" name="img" class="form-control">
+					</div>
+
+
+
+					<center><button type="submit" class="btn btn-success btn-lg btn-block">Submit</button></center>
+				</form>
+			</div>
+
+			<hr>
+
+			<!-- footer start-->
+			<footer class="footer1">
+				<p>© 2024 BookStore.com All Rights Reserved</p>
+			</footer>
+			<!-- footer end-->
+
+		</main>
+	</section>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
